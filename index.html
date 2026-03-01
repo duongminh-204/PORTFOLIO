@@ -20,9 +20,12 @@
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.149/pdf.min.mjs" type="module"></script>
-
+    <!-- Swiper 3D Coverflow -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- PhotoSwipe v5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.4/photoswipe.min.css" />
 </head>
 
 <body>
@@ -192,6 +195,55 @@
                         Currently seeking internship/full-time opportunities in backend development.
                     </p>
                 </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====================== ALBUM ẢNH 3D COVERFLOW ====================== -->
+    <section id="album" class="section py-5 bg-dark-secondary album-section">
+        <div class="container album-container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Album Image</h2>
+            <p class="text-center text-muted mb-5" data-aos="fade-up" data-aos-delay="100">
+                A collection of memorable moments captured in photos, showcasing life's beauty and diversity.
+            </p>
+
+            <!-- Fullscreen Toggle Button -->
+            <button id="albumFullscreenToggle" class="album-fullscreen-btn" aria-label="Toggle fullscreen" title="Fullscreen">
+                <i class="bi bi-arrows-fullscreen"></i>
+            </button>
+
+            <div class="swiper albumSwiper">
+                <div class="swiper-wrapper">
+                    <!-- Thay đường dẫn ảnh thật của bạn -->
+                    <div class="swiper-slide">
+                        <img src="assets/images/Coffee.jpg" data-pswp-src="assets/images/Coffee.jpg"
+                            data-pswp-width="1920" data-pswp-height="1280" alt="Khoảnh khắc 1" class="album-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/Debate.jpg" data-pswp-src="assets/images/Debate.jpg"
+                            data-pswp-width="1920" data-pswp-height="1280" alt="Khoảnh khắc 2" class="album-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/Fpt.jpg" data-pswp-src="assets/images/Fpt.jpg" data-pswp-width="1920"
+                            data-pswp-height="1280" alt="Khoảnh khắc 3" class="album-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/Sanco.jpg" data-pswp-src="assets/images/Sanco.jpg"
+                            data-pswp-width="1920" data-pswp-height="1280" alt="Khoảnh khắc 4" class="album-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/Sea.JPG" data-pswp-src="assets/images/Sea.JPG" data-pswp-width="1920"
+                            data-pswp-height="1280" alt="Khoảnh khắc 5" class="album-img">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/images/Earth.jpg" data-pswp-src="assets/images/Earth.jpg"
+                            data-pswp-width="1920" data-pswp-height="1280" alt="Khoảnh khắc 6" class="album-img">
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
@@ -576,7 +628,10 @@
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="main.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- PhotoSwipe JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.4/umd/photoswipe.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.4/umd/photoswipe-lightbox.umd.min.js"></script>
 </body>
 
 </html>

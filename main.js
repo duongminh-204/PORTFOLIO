@@ -7,29 +7,29 @@ AOS.init({
 });
 
 // Handle profile image click - open modal
-console.log('Script loaded, looking for profile image...');
-const profileImg = document.querySelector('.profile-img');
-console.log('Profile image found:', profileImg);
+// console.log('Script loaded, looking for profile image...');
+// const profileImg = document.querySelector('.profile-img');
+// console.log('Profile image found:', profileImg);
 
-if (profileImg) {
-    console.log('Attaching click listener to profile image');
-    profileImg.addEventListener('click', function (e) {
-        console.log('Profile image clicked!');
-        e.preventDefault();
-        e.stopPropagation();
-        const modalEl = document.getElementById('profileModal');
-        console.log('Modal element:', modalEl);
-        if (modalEl) {
-            const modal = new bootstrap.Modal(modalEl);
-            modal.show();
-            console.log('Modal shown');
-        } else {
-            console.error('Modal element not found!');
-        }
-    });
-} else {
-    console.error('Profile image not found!');
-}
+// if (profileImg) {
+//     console.log('Attaching click listener to profile image');
+//     profileImg.addEventListener('click', function (e) {
+//         console.log('Profile image clicked!');
+//         e.preventDefault();
+//         e.stopPropagation();
+//         const modalEl = document.getElementById('profileModal');
+//         console.log('Modal element:', modalEl);
+//         if (modalEl) {
+//             const modal = new bootstrap.Modal(modalEl);
+//             modal.show();
+//             console.log('Modal shown');
+//         } else {
+//             console.error('Modal element not found!');
+//         }
+//     });
+// } else {
+//     console.error('Profile image not found!');
+// }
 
 // Typed.js - Hero typing effect
 const typed = new Typed('#typed', {
@@ -200,4 +200,186 @@ document.addEventListener('DOMContentLoaded', () => {
             audio.play();
         }
     });
+});
+document.addEventListener('DOMContentLoaded', () => {
+    // Album Fullscreen Toggle
+    const fullscreenBtn = document.getElementById('albumFullscreenToggle');
+    const albumSection = document.getElementById('album');
+    let isAlbumFullscreen = false;
+
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', () => {
+            isAlbumFullscreen = !isAlbumFullscreen;
+            
+            if (isAlbumFullscreen) {
+                document.body.classList.add('album-fullscreen');
+                fullscreenBtn.innerHTML = '<i class="bi bi-fullscreen-exit"></i>';
+                fullscreenBtn.title = 'Exit fullscreen';
+                albumSection.style.transitionProperty = 'all';
+                albumSection.style.transitionDuration = '0.4s';
+            } else {
+                document.body.classList.remove('album-fullscreen');
+                fullscreenBtn.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>';
+                fullscreenBtn.title = 'Fullscreen';
+            }
+        });
+
+        // Exit fullscreen with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isAlbumFullscreen) {
+                isAlbumFullscreen = true; // Set to true so toggle will set it to false
+                fullscreenBtn.click();
+            }
+        });
+    }
+
+    new Swiper('.albumSwiper', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        loop: true,
+        speed: 900,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+        },
+        coverflowEffect: {
+            rotate: 45,
+            stretch: 0,
+            depth: 180,
+            modifier: 1.4,
+            slideShadows: true
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+            320: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 }
+        }
+    });
+
+
+    setTimeout(async () => {
+        const realSlides = document.querySelectorAll('.albumSwiper .swiper-slide:not(.swiper-slide-duplicate) img');
+
+      
+        const galleryItems = await Promise.all(
+            Array.from(realSlides).map(img => {
+                return new Promise((resolve) => {
+                    const image = new Image();
+                    image.onload = () => {
+                        resolve({
+                            src: img.src,
+                           
+                            width: image.naturalWidth,
+                            height: image.naturalHeight
+                        });
+                    };
+                    image.onerror = () => {
+                        
+                        console.warn('Could not load image for dimensions, using defaults', img.src);
+                        resolve({ src: img.src, width: 800, height: 600 });
+                    };
+                    image.src = img.src;
+                });
+            })
+        );
+
+        const lightbox = new PhotoSwipeLightbox({
+            dataSource: galleryItems,
+            pswpModule: PhotoSwipe,
+            wheelToZoom: true,
+            pinchToClose: true,
+            showHideAnimationType: 'zoom',
+            bgOpacity: 0.98,
+            padding: { top: 30, bottom: 40, left: 10, right: 10 }
+        });
+
+        lightbox.init();
+        // Add a fullscreen toggle button into the PhotoSwipe lightbox when opened
+        function createPswpFullscreenButton(pswpEl) {
+            const btn = document.createElement('button');
+            btn.className = 'pswp-fullscreen-btn';
+            btn.setAttribute('aria-label', 'Toggle fullscreen');
+            btn.title = 'Fullscreen';
+            btn.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>';
+            pswpEl.appendChild(btn);
+
+            const toggleFs = async () => {
+                try {
+                    if (!document.fullscreenElement) {
+                        await (pswpEl.requestFullscreen ? pswpEl.requestFullscreen() : document.documentElement.requestFullscreen());
+                    } else {
+                        await document.exitFullscreen();
+                    }
+                } catch (err) {
+                    console.error('Fullscreen toggle failed:', err);
+                }
+            };
+
+            btn.addEventListener('click', toggleFs);
+
+            const fsChangeHandler = () => {
+                if (!document.fullscreenElement) {
+                    btn.innerHTML = '<i class="bi bi-arrows-fullscreen"></i>';
+                    btn.title = 'Fullscreen';
+                } else {
+                    btn.innerHTML = '<i class="bi bi-fullscreen-exit"></i>';
+                    btn.title = 'Exit fullscreen';
+                }
+            };
+
+            document.addEventListener('fullscreenchange', fsChangeHandler);
+
+            return { btn, fsChangeHandler };
+        }
+
+        lightbox.on && lightbox.on('open', () => {
+            // small delay to ensure PhotoSwipe DOM exists
+            setTimeout(() => {
+                const pswpEl = document.querySelector('.pswp');
+                if (pswpEl && !pswpEl.querySelector('.pswp-fullscreen-btn')) {
+                    // store reference globally so we can clean up on close
+                    window.__pswpFs = createPswpFullscreenButton(pswpEl);
+                }
+            }, 60);
+        });
+
+        lightbox.on && lightbox.on('close', () => {
+            if (window.__pswpFs) {
+                const { btn, fsChangeHandler } = window.__pswpFs;
+                try {
+                    if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+                    document.removeEventListener('fullscreenchange', fsChangeHandler);
+                } catch (e) { console.warn(e); }
+
+                // If still in fullscreen, exit
+                if (document.fullscreenElement) {
+                    document.exitFullscreen().catch(() => { });
+                }
+
+                window.__pswpFs = null;
+            }
+        });
+
+        realSlides.forEach((img, index) => {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                lightbox.loadAndOpen(index);
+            });
+        });
+
+        console.log('PhotoSwipe đã fix thành công với', galleryItems.length, 'ảnh');
+    }, 600);
 });
