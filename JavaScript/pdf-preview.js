@@ -1,5 +1,6 @@
 // pdf-preview.js
-const cvUrl = 'assets/cv/duongquangminh_cv.pdf';
+const basePath = window.location.pathname.replace(/\/+$/, ''); 
+const cvUrl = `${basePath}/assets/cv/duongquangminh_cv.pdf`;
 
 async function loadPdfPreview() {
     const loadingElement = document.getElementById('previewLoading');
