@@ -1,0 +1,33 @@
+.skill-item {
+    background: rgba(59, 130, 246, 0.12);
+    padding: 14px 24px;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.35s ease;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.skill-item:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+.skill-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+}
+
+.skill-item:hover .skill-logo {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.skill-item span {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--gray);
+    margin-top: 8px;
+}

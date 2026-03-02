@@ -1,0 +1,94 @@
+body {
+    background-color: var(--dark);
+    color: var(--light);
+    scroll-behavior: smooth;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.navbar {
+    background-color: rgba(15, 23, 42, 0.92) !important;
+    backdrop-filter: blur(12px);
+    transition: all 0.4s;
+}
+
+.section {
+    padding: 120px 0;
+}
+
+.section-title {
+    font-weight: 700;
+    color: var(--primary);
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 4px;
+    background: var(--primary);
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.card-dark {
+    background: var(--dark-secondary);
+    border: none;
+    border-radius: 16px;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.card-dark:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 50px rgba(59, 130, 246, 0.22);
+}
+
+[data-bs-theme="light"] .navbar {
+    background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+[data-bs-theme="light"] .card-dark,
+[data-bs-theme="light"] .bg-dark-secondary {
+    background: #ffffff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.hover-primary:hover {
+    color: var(--primary) !important;
+}
+
+.dropdown-menu {
+    background: var(--dark-secondary);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(10px);
+    transform-origin: top center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.dropdown-item {
+    transition: all 0.3s ease;
+    color: var(--light);
+}
+
+.dropdown-item:hover {
+    background: rgba(59, 130, 246, 0.18);
+    transform: translateX(8px);
+    color: var(--primary) !important;
+}
+
+.navbar-brand.dropdown-toggle:hover {
+    color: var(--primary) !important;
+    transform: scale(1.08);
+}

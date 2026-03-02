@@ -1,0 +1,16 @@
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --dark: #0f172a;
+    --dark-secondary: #1e293b;
+    --light: #e2e8f0;
+    --gray: #94a3b8;
+}
+
+[data-bs-theme="light"] {
+    --dark: #f8fafc;
+    --dark-secondary: #ffffff;
+    --light: #1e293b;
+    --gray: #64748b;
+    --primary: #2563eb;
+}

@@ -1,0 +1,18 @@
+.certificate-card {
+    transition: all 0.4s ease;
+    border-radius: 16px;
+    background: var(--dark-secondary);
+}
+
+.certificate-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 50px rgba(59, 130, 246, 0.22);
+}
+
+.certificate-card i.bi-award-fill {
+    transition: transform 0.4s ease;
+}
+
+.certificate-card:hover i.bi-award-fill {
+    transform: scale(1.2) rotate(10deg);
+}

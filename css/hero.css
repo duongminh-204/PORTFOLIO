@@ -1,0 +1,37 @@
+.hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    position: relative;
+    padding: 80px 0 120px;
+}
+
+/* CV Preview */
+.cv-preview-mini {
+    perspective: 1000px;
+}
+
+.pdf-preview-container {
+    transform: scale(0.68);
+    transform-origin: top center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s ease;
+}
+
+.pdf-preview-container:hover {
+    transform: scale(0.78) translateY(-12px);
+    box-shadow: 0 25px 60px rgba(59, 130, 246, 0.35);
+}
+
+#pdfPreviewCanvas {
+    clip-path: polygon(0 0, 100% 0, 100% 52%, 0 52%);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cursor-pointer:hover {
+    transform: scale(1.04) translateY(-8px);
+    box-shadow: 0 25px 60px rgba(59, 130, 246, 0.4) !important;
+}
