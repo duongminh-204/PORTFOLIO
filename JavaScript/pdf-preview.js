@@ -1,5 +1,5 @@
 // pdf-preview.js
-const cvUrl = 'assets/cv/DuongQuangMinh_CV.pdf';
+const cvUrl = 'assets/cv/duongquangminh_cv.pdf';
 
 async function loadPdfPreview() {
     const loadingElement = document.getElementById('previewLoading');
