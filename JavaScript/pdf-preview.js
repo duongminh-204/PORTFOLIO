@@ -1,12 +1,14 @@
 // pdf-preview.js
 const cvUrl = './assets/cv/DuongQuangMinh_cv.pdf';
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 async function loadPdfPreview() {
     const loadingElement = document.getElementById('previewLoading');
     const canvas = document.getElementById('pdfPreviewCanvas');
     if (!canvas || typeof pdfjsLib === 'undefined') return;
-     
+
     try {
-   
+
         if (typeof pdfjsLib !== 'undefined' && (!pdfjsLib.GlobalWorkerOptions || !pdfjsLib.GlobalWorkerOptions.workerSrc) && window.__pdfWorkerSrc) {
             pdfjsLib.GlobalWorkerOptions = pdfjsLib.GlobalWorkerOptions || {};
             pdfjsLib.GlobalWorkerOptions.workerSrc = window.__pdfWorkerSrc;
@@ -40,6 +42,6 @@ async function loadPdfPreview() {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', loadPdfPreview);
 } else {
-    
+
     setTimeout(loadPdfPreview, 100);
 }
