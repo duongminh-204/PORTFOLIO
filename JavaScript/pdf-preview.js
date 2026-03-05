@@ -1,14 +1,12 @@
 // pdf-preview.js
-const basePath = window.location.pathname.replace(/\/+$/, ''); 
-const cvUrl = `${basePath}/assets/cv/duongquangminh_cv.pdf`;
-
+const cvUrl = './assets/cv/DuongQuangMinh_cv.pdf';
 async function loadPdfPreview() {
     const loadingElement = document.getElementById('previewLoading');
     const canvas = document.getElementById('pdfPreviewCanvas');
     if (!canvas || typeof pdfjsLib === 'undefined') return;
-
+     
     try {
-        // Apply fallback worker src if registered earlier
+   
         if (typeof pdfjsLib !== 'undefined' && (!pdfjsLib.GlobalWorkerOptions || !pdfjsLib.GlobalWorkerOptions.workerSrc) && window.__pdfWorkerSrc) {
             pdfjsLib.GlobalWorkerOptions = pdfjsLib.GlobalWorkerOptions || {};
             pdfjsLib.GlobalWorkerOptions.workerSrc = window.__pdfWorkerSrc;
@@ -38,10 +36,10 @@ async function loadPdfPreview() {
     }
 }
 
-// Wait for DOM and components to be ready
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', loadPdfPreview);
 } else {
-    // Add a small delay to ensure hero component is loaded
+    
     setTimeout(loadPdfPreview, 100);
 }
